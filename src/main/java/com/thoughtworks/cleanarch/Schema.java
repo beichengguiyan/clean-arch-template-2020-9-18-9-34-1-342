@@ -22,6 +22,11 @@ public class Schema {
 
     public Object getDefaultValueOf(String flag) {
 
+        for (FlagSchema flagSchema : flagSchemas) {
+            if (flagSchema.getFlag().equals(flag)) {
+                return flagSchema.getDefaultValue();
+            }
+        }
         return null;
     }
 }

@@ -26,4 +26,23 @@ public class SchemaTest {
         //then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void should_return_false_when_given_flag_l() {
+        //given
+        Boolean expected = false;
+        FlagSchema flagSchemaOne = new FlagSchema("l",ValueType.BOOLEAN);
+        FlagSchema flagSchemaTwo = new FlagSchema("p",ValueType.INTEGER);
+        FlagSchema flagSchemaThree = new FlagSchema("d",ValueType.STRING);
+        List<FlagSchema> flagSchemas = new ArrayList<>();
+        flagSchemas.add(flagSchemaOne);
+        flagSchemas.add(flagSchemaTwo);
+        flagSchemas.add(flagSchemaThree);
+        Schema schema = new Schema(flagSchemas);
+        //when
+        Object actual = schema.getDefaultValueOf("l");
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
 }
