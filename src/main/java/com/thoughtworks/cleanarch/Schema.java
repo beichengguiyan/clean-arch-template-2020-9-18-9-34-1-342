@@ -1,5 +1,6 @@
 package com.thoughtworks.cleanarch;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Schema {
@@ -28,5 +29,21 @@ public class Schema {
             }
         }
         return null;
+    }
+
+    public List<Argument> assignDefault(List<Argument> argumentsFromKeyValuePairs) {
+        List<Argument> arguments = new ArrayList<>();
+        for (Argument argument : argumentsFromKeyValuePairs) {
+            String flag = argument.getFlag();
+            Object value;
+            if (argument.getValue() == null) {
+                value = getDefaultValueOf(flag);
+            } else {
+                value = argument.getValue();
+            }
+            Argument argumentTemp = new Argument(flag, value);
+            arguments.add(argumentTemp);
+        }
+        return arguments;
     }
 }

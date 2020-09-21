@@ -1,20 +1,23 @@
 package com.thoughtworks.cleanarch;
 
-import org.apache.ibatis.annotations.Arg;
-
 import java.util.List;
 
 public class Args {
-    private List<Arg> argPairs;
+    private List<Argument> argPairs;
     private String args;
-    private Schema schema;
 
-    public Args(String args, Schema schema) {
+    public Args(List<Argument> argPairs,String args) {
+        this.argPairs = argPairs;
         this.args = args;
-        this.schema = schema;
     }
 
     public Object getValueOf(String flag) {
+
+        for (Argument arg : argPairs) {
+            if (arg.getFlag().equals(flag)) {
+                return arg.getValue();
+            }
+        }
         return null;
     }
 }
